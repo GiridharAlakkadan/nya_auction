@@ -30,6 +30,7 @@ class _NextPlayerPageState extends State<NextPlayerPage> {
   TextEditingController mi = TextEditingController();
   TextEditingController rr = TextEditingController();
   TextEditingController dc = TextEditingController();
+  TextEditingController srh = TextEditingController();
   TextEditingController nextPlayer = TextEditingController();
   FocusNode nplayer = FocusNode();
   late SharedPreferences prefs;
@@ -37,11 +38,12 @@ class _NextPlayerPageState extends State<NextPlayerPage> {
   void initState() {
     SharedPreferences.getInstance().then((value) {
       prefs = value;
-      rcb.text = value.getString('rcb') ?? ""; //RM
-      mi.text = value.getString('mi') ?? ""; //FCB
-      dc.text = value.getString('dc') ?? ""; // ACM
-      csk.text = value.getString('csk') ?? ""; //MCT
-      rr.text = value.getString('rr') ?? ""; // ARS
+      rcb.text = value.getString('rcb') ?? "";
+      mi.text = value.getString('mi') ?? "";
+      dc.text = value.getString('dc') ?? "";
+      csk.text = value.getString('csk') ?? "";
+      rr.text = value.getString('rr') ?? "";
+      srh.text = value.getString('srh') ?? "";
     });
     super.initState();
   }
@@ -63,17 +65,17 @@ class _NextPlayerPageState extends State<NextPlayerPage> {
           body: Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
-              image: AssetImage("assets/bg.png"),
+              image: AssetImage("assets/bg/select.png"),
               fit: BoxFit.fill,
             )),
             child: Stack(
               children: <Widget>[
                 Positioned(
-                  bottom: height * 0.2,
-                  right: width * 0.055,
+                  bottom: height * 0.15,
+                  right: width * 0.175,
                   child: SizedBox(
                     // padding: const EdgeInsets.all(8),
-                    width: 250,
+                    width: 350,
                     // height: 250,
                     child: TextFormField(
                       cursorColor: Colors.black,
@@ -106,13 +108,13 @@ class _NextPlayerPageState extends State<NextPlayerPage> {
                   ),
                 ),
                 Positioned(
-                  top: height * 0.1,
-                  left: width * 0.2,
+                  top: height * 0.412,
+                  left: width * 0.35,
                   child: SizedBox(
                     // padding: const EdgeInsets.all(8),
                     width: 250,
                     child: TextFormField(
-                      cursorColor: Colors.black,
+                      cursorColor: Colors.white,
                       controller: rcb,
                       onChanged: (v) {
                         prefs.setString('rcb', v);
@@ -125,7 +127,7 @@ class _NextPlayerPageState extends State<NextPlayerPage> {
                       decoration: const InputDecoration(
                           border: InputBorder.none, counterText: ''),
                       style: const TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: 55,
                           letterSpacing: 5,
                           fontFamily: 'nya',
@@ -134,8 +136,8 @@ class _NextPlayerPageState extends State<NextPlayerPage> {
                   ),
                 ),
                 Positioned(
-                  top: height * 0.28,
-                  left: width * 0.2,
+                  top: height * 0.412,
+                  left: width * 0.05,
                   child: SizedBox(
                     width: 250,
                     child: TextFormField(
@@ -161,8 +163,8 @@ class _NextPlayerPageState extends State<NextPlayerPage> {
                   ),
                 ),
                 Positioned(
-                  bottom: height * 0.1,
-                  left: width * 0.2,
+                  top: height * 0.865,
+                  left: width * 0.35,
                   child: SizedBox(
                     width: 250,
                     child: TextFormField(
@@ -188,8 +190,8 @@ class _NextPlayerPageState extends State<NextPlayerPage> {
                   ),
                 ),
                 Positioned(
-                  bottom: height * 0.28,
-                  left: width * 0.2,
+                  top: height * 0.865,
+                  left: width * 0.05,
                   child: SizedBox(
                     width: 250,
                     child: TextFormField(
@@ -215,10 +217,36 @@ class _NextPlayerPageState extends State<NextPlayerPage> {
                   ),
                 ),
                 Positioned(
-                  bottom: height * 0.45,
+                  top: height * 0.865,
                   left: width * 0.2,
                   child: SizedBox(
-                    // color: Colors.white,
+                    width: 250,
+                    child: TextFormField(
+                      cursorColor: Colors.white,
+                      controller: srh,
+                      onChanged: (v) {
+                        prefs.setString('srh', v);
+                      },
+                      maxLength: 4,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))
+                      ],
+                      decoration: const InputDecoration(
+                          border: InputBorder.none, counterText: ''),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 55,
+                          letterSpacing: 5,
+                          fontFamily: 'nya',
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: height * 0.412,
+                  left: width * 0.2,
+                  child: SizedBox(
                     width: 250,
                     child: TextFormField(
                       controller: rr,

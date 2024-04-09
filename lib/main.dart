@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nya_auction/category.dart';
+import 'package:nya_auction/next_player.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_size/window_size.dart';
 
@@ -11,7 +12,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    setWindowTitle('NSL 2');
+    setWindowTitle('NPL 4');
     setWindowMinSize(const Size(1450, 920));
   }
   runApp(const MyApp());
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'NPL Auction 4'),
     );
   }
 }
@@ -76,6 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// AC Milan
   TextEditingController dc = TextEditingController();
+  TextEditingController srh = TextEditingController();
   // TextEditingController nextPlayer = TextEditingController();
   late SharedPreferences prefs;
   @override
@@ -93,19 +95,22 @@ class _MyHomePageState extends State<MyHomePage> {
     dc.text = value.getString('dc') ?? ""; // ACM
     csk.text = value.getString('csk') ?? ""; //MCT
     rr.text = value.getString('rr') ?? ""; // ARS
+    srh.text = value.getString('srh') ?? ""; // ARS
   }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.red,
           onPressed: () {
-            Get.to(() => const Category(), transition: Transition.rightToLeft)
+            Get.to(() => const NextPlayerPage(title: 'Test', pType: 2),
+                    transition: Transition.rightToLeft)
                 ?.then((value) => getDBData(prefs));
           },
           child: const Icon(Icons.keyboard_arrow_right),
@@ -114,14 +119,14 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
-            image: AssetImage("assets/home.png"),
+            image: AssetImage("assets/bg/purse.png"),
             fit: BoxFit.fill,
           )),
           child: Stack(
             children: <Widget>[
               Positioned(
-                top: height * 0.4,
-                left: width * 0.02,
+                top: height * 0.835,
+                left: width * 0.36,
                 child: SizedBox(
                   // padding: const EdgeInsets.all(8),
                   width: 250,
@@ -148,8 +153,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Positioned(
-                top: height * 0.795,
-                left: width * 0.02,
+                top: height * 0.835,
+                left: width * 0.055,
                 child: SizedBox(
                   width: 250,
                   child: TextFormField(
@@ -175,8 +180,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Positioned(
-                top: height * 0.795,
-                left: width * 0.35,
+                top: height * 0.835,
+                left: width * 0.21,
                 child: SizedBox(
                   width: 250,
                   child: TextFormField(
@@ -202,8 +207,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Positioned(
-                top: height * 0.795,
-                left: width * 0.68,
+                top: height * 0.835,
+                left: width * 0.51,
                 child: SizedBox(
                   width: 250,
                   child: TextFormField(
@@ -229,8 +234,35 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Positioned(
-                top: height * 0.4,
-                left: width * 0.68,
+                top: height * 0.835,
+                left: width * 0.66,
+                child: SizedBox(
+                  width: 250,
+                  child: TextFormField(
+                    cursorColor: Colors.white,
+                    controller: srh,
+                    onChanged: (v) {
+                      prefs.setString('srh', v);
+                    },
+                    maxLength: 4,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$'))
+                    ],
+                    decoration: const InputDecoration(
+                        border: InputBorder.none, counterText: ''),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 55,
+                        letterSpacing: 5,
+                        fontFamily: 'nya',
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: height * 0.835,
+                left: width * 0.815,
                 child: SizedBox(
                   // color: Colors.white,
                   width: 250,

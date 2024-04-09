@@ -33,10 +33,12 @@ class _PlayerViewerState extends State<PlayerViewer> {
             appBar: AppBar(
               elevation: 0,
               backgroundColor: Colors.black,
+              foregroundColor: Colors.white,
               title: Text(
                 '$pType ${widget.playerNumber}',
                 style: const TextStyle(
                     // fontSize: 40,
+                    color: Colors.white,
                     letterSpacing: 5,
                     fontFamily: 'nya',
                     fontWeight: FontWeight.w600),
@@ -72,13 +74,15 @@ class _PlayerViewerState extends State<PlayerViewer> {
 
   String getSrcFromNoAndType(int type, String no) {
     String src = '';
-    if (type == 0) {
-      src = 'assets/icons/I${widget.playerNumber}.png';
-    } else if (type == 1) {
-      src = 'assets/keepers/K${widget.playerNumber}.png';
-    } else {
-      src = 'assets/players/P${widget.playerNumber}.png';
-    }
+    src = 'assets/players/${widget.playerNumber}.png';
     return src;
+    // if (type == 0) {
+    //   src = 'assets/icons/I${widget.playerNumber}.png';
+    // } else if (type == 1) {
+    //   src = 'assets/keepers/K${widget.playerNumber}.png';
+    // } else {
+    //   src = 'assets/players/P${widget.playerNumber}.png';
+    // }
+    // return src;
   }
 }
