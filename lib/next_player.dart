@@ -61,6 +61,13 @@ class _NextPlayerPageState extends State<NextPlayerPage> {
       child: Focus(
         autofocus: true,
         child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.amber,
+            onPressed: () {
+              Get.back();
+            },
+            child: const Icon(Icons.keyboard_arrow_left),
+          ),
           backgroundColor: Colors.transparent,
           body: Container(
             decoration: const BoxDecoration(
@@ -71,7 +78,7 @@ class _NextPlayerPageState extends State<NextPlayerPage> {
             child: Stack(
               children: <Widget>[
                 Positioned(
-                  bottom: height * 0.15,
+                  bottom: height * 0.09,
                   right: width * 0.175,
                   child: SizedBox(
                     // padding: const EdgeInsets.all(8),
@@ -100,7 +107,7 @@ class _NextPlayerPageState extends State<NextPlayerPage> {
                           border: InputBorder.none, counterText: ''),
                       style: const TextStyle(
                           color: Colors.black,
-                          fontSize: 110,
+                          fontSize: 180,
                           letterSpacing: 5,
                           fontFamily: 'nya',
                           fontWeight: FontWeight.w600),
